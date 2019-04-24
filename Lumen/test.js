@@ -10,7 +10,8 @@ var x2;
 
 var scrollSpeed = .15;
 
-var inputVal = false;
+var inputVal = true;
+var alpha = 0;
 
 function preload(){
 	bgImg = loadImage("http://i.imgur.com/WwYEKlu.jpg");
@@ -73,10 +74,16 @@ function draw() {
 		star.shoot();
 	}
     
-    if(inputVal == true) {
-        rect(0,0,100,100);
-        rect.background;
-    }
+    if(inputVal == false) {
+				c = color('rgba(0, 0, 0, .7)')
+				fill(c);
+				rect(0,0,windowWidth,(windowHeight-windowHeight/10));
+				
+				co = color('rgba(255, 178, 102, .7)')
+				fill(co);
+				rect(0, (windowHeight-windowHeight/10), windowWidth, windowHeight);
+				//https://p5js.org/examples/color-linear-gradient.html
+		}
     
 }
 
