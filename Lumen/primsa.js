@@ -15,11 +15,11 @@ function printValue(text){
             if(NEEDEDVALUE == "1")
                 {
                     console.log("It's On " + NEEDEDVALUE);
-                    inputVal = true;
+                    //inputVal = true;
                     
                 }else{
                     console.log("It's Off " + NEEDEDVALUE); 
-                    inputVal = false;
+                    //inputVal = false;
                 }
         }
     }
