@@ -78,12 +78,11 @@ function draw() {
 
 	//CODE THIS BETTER
   if (inputVal == false) {
-		if(cAlpha < .9) {
+		if(cAlpha < .97) {
 			cAlpha += .005;
 		}
-		console.log(cAlpha)
 		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
-		let c2String = 'rgba(255, 178, 102,' + cAlpha + ')';
+		let c2String = 'rgba(137, 88, 25,' + cAlpha + ')';
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
 		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
@@ -92,7 +91,6 @@ function draw() {
 		if(cAlpha > .01) {
 			cAlpha -= .005;
 		}
-		console.log(cAlpha)
 		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
 		let c2String = 'rgba(255, 178, 102,' + cAlpha + ')';
 		let c1 = color(c1String);
@@ -109,7 +107,7 @@ function setGradient(x, y, w, h, c1, c2, axis) {
     // Top to bottom gradient
     for (let i = y; i <= y + h; i++) {
       let inter = map(i, y, y + h, 0, 1);
-      let c = lerpColor(c1, c2, inter-.50);
+      let c = lerpColor(c1, c2, inter);
       stroke(c);
       line(x, i, x + w, i);
     }
