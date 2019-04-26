@@ -82,7 +82,7 @@ function draw() {
 			cAlpha += .005;
 		}
 		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
-		let c2String = 'rgba(147, 88, 20,' + cAlpha + ')';
+		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
 		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
@@ -92,7 +92,7 @@ function draw() {
 			cAlpha -= .005;
 		}
 		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
-		let c2String = 'rgba(147, 88, 20,' + cAlpha + ')';
+		let c2String = 'rgba(104, 65, 10' + cAlpha + ')';
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
 		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
