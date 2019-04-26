@@ -87,7 +87,8 @@ function draw() {
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
 		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
-  } else {
+	} 
+	if (inputVal == true) {
 		if(cAlpha > .01) {
 			cAlpha -= .005;
 		}
