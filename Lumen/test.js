@@ -8,7 +8,7 @@ var bgImg2;
 var x1 = 0;
 var x2;
 
-var scrollSpeed = 0.15;
+var scrollSpeed = 0.4;
 
 var inputVal = true;
 var alpha = 0;
