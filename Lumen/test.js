@@ -10,7 +10,8 @@ var x2;
 
 var scrollSpeed = 0.04;
 
-var inputVal = true;
+var stateVal = 0;
+
 var alpha = 0;
 
 const Y_AXIS = 1;
@@ -75,9 +76,7 @@ function draw() {
     star.shoot();
   }
 
-
-	//CODE THIS BETTER
-  if (inputVal == false) {
+  if (stateVal == 3) {
 		if(cAlpha < .97) {
 			cAlpha += .005;
 		}
@@ -86,8 +85,35 @@ function draw() {
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
 		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+  } 
+
+  if (stateVal == 2) {
+		if(cAlpha < .63) {
+			cAlpha += .005;
+		} else if (cAlpha > .66) {
+      cAlpha -= .005;
+    }
+		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
+		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
+		let c1 = color(c1String);
+		let c2 = color(c2String);//255, 178, 102
+		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+  } 
+  
+  if (stateVal == 1) {
+		if(cAlpha < .33) {
+			cAlpha += .005;
+		} else if (cAlpha > .36) {
+      cAlpha -= .005;
+    }
+		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
+		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
+		let c1 = color(c1String);
+		let c2 = color(c2String);//255, 178, 102
+		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
 	} 
-	if (inputVal == true) {
+
+	if (stateVal == 0) {
 		if(cAlpha > .01) {
 			cAlpha -= .005;
 		}
@@ -96,13 +122,13 @@ function draw() {
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
 		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
-	}
+  }
+  
+  console.log(stateVal)
 }
 
 function setGradient(x, y, w, h, c1, c2, axis) {
   noFill();
-  
-  //https://p5js.org/examples/color-linear-gradient.html
   if (axis === Y_AXIS) {
     // Top to bottom gradient
     for (let i = y; i <= y + h; i++) {
@@ -175,11 +201,11 @@ function Star(x, y, r) {
 
 function keyPressed() {
 	if (keyCode === TAB) {
-		if (inputVal == false) {
-			inputVal = true;
-		} else {
-			inputVal = false;
-		}
+		if(stateVal == 3) {
+      stateVal = 0;
+    } else {
+      stateVal += 1;
+    }
 		
 	} 
 }

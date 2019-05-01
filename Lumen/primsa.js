@@ -8,21 +8,31 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 function printValue(text){
     let obj = JSON.parse(text);
-    let objFeeds = obj.feeds
+    let objFeeds = obj.feeds;
+    let switchCount = 0;
     for(let i = 0; i < objFeeds.length; i ++) {
-        if(objFeeds[i].name == "TestConnectionWithRaspberryPi") {
+        if(objFeeds[i].name == "Switch1") {
             NEEDEDVALUE = objFeeds[i].last_value;
-            if(NEEDEDVALUE == "1")
-                {
-                    console.log("It's On " + NEEDEDVALUE);
-                    inputVal = true;
-                    
-                }else{
-                    console.log("It's Off " + NEEDEDVALUE); 
-                    inputVal = false;
-                }
+            if(NEEDEDVALUE == "1") {
+                switchCount += 1;
+            }
+        }
+
+        if(objFeeds[i].name == "Switch2") {
+            NEEDEDVALUE = objFeeds[i].last_value;
+            if(NEEDEDVALUE == "1") {
+                switchCount += 1;
+            }
+        }
+
+        if(objFeeds[i].name == "Switch3") {
+            NEEDEDVALUE = objFeeds[i].last_value;
+            if(NEEDEDVALUE == "1") {
+                switchCount += 1; 
+            }
         }
     }
+    stateVal = switchCount;
 }
 
 //constantly being called to update
