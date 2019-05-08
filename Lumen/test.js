@@ -9,23 +9,32 @@ var x1 = 0;
 var x2;
 
 var scrollSpeed = 0.04;
-
 var stateVal = 0;
-
 var alpha = 0;
-
 const Y_AXIS = 1;
-
 let cAlpha = 0;
 
+let sound0;
+let sound1;
+let sound2;
+let sound3;
+
 function preload() {
-  bgImg = loadImage("http://i.imgur.com/WwYEKlu.jpg");
-  bgImg2 = loadImage("https://i.imgur.com/eHWl09m.jpg");
+  //bgImg = loadImage("http://i.imgur.com/WwYEKlu.jpg");
+  //bgImg2 = loadImage("https://i.imgur.com/eHWl09m.jpg");
+
+  bgImg = loadImage("https://i.imgur.com/lbDXMXA.jpg");
+  bgImg2 = loadImage("https://i.imgur.com/lbDXMXA.jpg");
+
+  soundFormats('mp3', 'ogg');
+  //sound0 = loadSound('fileLocation')
+  //sound1 = loadSound('fileLocation')
+  //sound2 = loadSound('fileLocation')
+  //sound3 = loadSound('fileLocation')
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   x2 = width;
 
   //create a bunch of stars in random locations
@@ -33,7 +42,6 @@ function setup() {
     x = random(width);
     y = random(height - height / 10);
     r = floor(random(minStarSize, maxStarSize));
-
     stars.push(new Star(x, y, r));
   }
 }
@@ -82,7 +90,8 @@ function draw() {
 		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
-		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+    setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+    //play sound3
   } 
 
   if (stateVal == 2) {
@@ -95,7 +104,8 @@ function draw() {
 		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
-		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+    setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+    //play sound2
   } 
   
   if (stateVal == 1) {
@@ -108,7 +118,8 @@ function draw() {
 		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
-		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+    setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+    //play sound1
 	} 
 
 	if (stateVal == 0) {
@@ -119,10 +130,9 @@ function draw() {
 		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
-		setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+    setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
+    //play sound0
   }
-  
-  console.log(stateVal)
 }
 
 function setGradient(x, y, w, h, c1, c2, axis) {
@@ -154,7 +164,7 @@ function Star(x, y, r) {
       this.y += this.yoff;
       this.alpha -= 5;
     }
-
+    
     //shimmer
     if (random(1) < 0.005) {
       red = floor(random(0, 127));
@@ -195,6 +205,5 @@ function keyPressed() {
     } else {
       stateVal += 1;
     }
-		
 	} 
 }
