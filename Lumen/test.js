@@ -5,10 +5,14 @@ var minStarSize = 1;
 var maxStarSize = 6;
 var bgImg;
 var bgImg2;
+var mtnImg;
 var x1 = 0;
 var x2;
+var x3;
+var x4;
 
-var scrollSpeed = 0.04;
+var scrollSpeed = 0.02;
+var starScrollSpeed = -0.02;
 var stateVal = 0;
 var alpha = 0;
 const Y_AXIS = 1;
@@ -23,8 +27,9 @@ function preload() {
   //bgImg = loadImage("http://i.imgur.com/WwYEKlu.jpg");
   //bgImg2 = loadImage("https://i.imgur.com/eHWl09m.jpg");
 
-  bgImg = loadImage("https://i.imgur.com/lbDXMXA.jpg");
-  bgImg2 = loadImage("https://i.imgur.com/lbDXMXA.jpg");
+  bgImg = loadImage("https://i.imgur.com/hBm533Y.jpg");
+  bgImg2 = loadImage("https://i.imgur.com/hBm533Y.jpg");
+  mtnImg = loadImage("https://i.imgur.com/JUpNcRG.png");
 
   soundFormats('mp3', 'ogg');
   //sound0 = loadSound('fileLocation')
@@ -36,11 +41,13 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   x2 = width;
+  x3 = x1;
+  x4 = x2;
 
   //create a bunch of stars in random locations
   for (var i = 0; i < numStars; i++) {
     x = random(width);
-    y = random(height - height / 10);
+    y = random(height - 315);
     r = floor(random(minStarSize, maxStarSize));
     stars.push(new Star(x, y, r));
   }
@@ -49,6 +56,9 @@ function setup() {
 function draw() {
   image(bgImg, x1, 0, width, height);
   image(bgImg2, x2, 0, width, height);
+  image(mtnImg, x1, height-312, width, 312);
+  image(mtnImg, x2, height-312, width, 312);
+
 
   x1 -= scrollSpeed;
   x2 -= scrollSpeed;
@@ -73,7 +83,7 @@ function draw() {
       //star is off screen, remove it from the array
       stars.splice(i, 1);
     }
-    stars[i].x -= scrollSpeed;
+    stars[i].x -= starScrollSpeed;
   }
 
   //every 250 frames, pick a star and shoot it!
