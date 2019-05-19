@@ -1,67 +1,64 @@
 var stars = []; //array that holds our stars.
 
-var numStars = 200; //How many stars do you want?
+var numStars = 400; //How many stars do you want?
 var minStarSize = 1;
-var maxStarSize = 6;
+var maxStarSize = 3;
 var bgImg;
 var bgImg2;
 var mtnImg;
 var x1 = 0;
 var x2;
-var x3;
-var x4;
 
-var scrollSpeed = 0.02;
+var scrollingSpeed = 0.02;
 var starScrollSpeed = -0.02;
 var stateVal = 0;
-var alpha = 0;
+var alphaVal = 0;
 const Y_AXIS = 1;
 let cAlpha = 0;
 
-let sound0;
-let sound1;
-let sound2;
-let sound3;
+var sound0;
+var sound0Vol;
+var sound3;
+var sound3Vol;
 
 function preload() {
-  //bgImg = loadImage("http://i.imgur.com/WwYEKlu.jpg");
-  //bgImg2 = loadImage("https://i.imgur.com/eHWl09m.jpg");
-
   bgImg = loadImage("https://i.imgur.com/hBm533Y.jpg");
   bgImg2 = loadImage("https://i.imgur.com/hBm533Y.jpg");
   mtnImg = loadImage("https://i.imgur.com/JUpNcRG.png");
 
   soundFormats('mp3', 'ogg');
-  //sound0 = loadSound('fileLocation')
-  //sound1 = loadSound('fileLocation')
-  //sound2 = loadSound('fileLocation')
-  //sound3 = loadSound('fileLocation')
+  sound0 = loadSound('sounds/citySound2.mp3')
+  sound3 = loadSound('sounds/citySound1.mp3')
+  sound0Vol = 0;
+  sound3Vol = 0;
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   x2 = width;
-  x3 = x1;
-  x4 = x2;
 
-  //create a bunch of stars in random locations
   for (var i = 0; i < numStars; i++) {
     x = random(width);
-    y = random(height - 315);
+    y = random(height - 156);
     r = floor(random(minStarSize, maxStarSize));
     stars.push(new Star(x, y, r));
   }
+  sound0.setVolume(0);
+  sound0.play();
+  sound0.loop();
+  sound3.setVolume(0);
+  sound3.play();
+  sound3.loop();
 }
 
 function draw() {
   image(bgImg, x1, 0, width, height);
   image(bgImg2, x2, 0, width, height);
-  image(mtnImg, x1, height-312, width, 312);
-  image(mtnImg, x2, height-312, width, 312);
+  image(mtnImg, 0, height-156, width/2, 156);
+  image(mtnImg, width/2, height-156, width/2, 156);
 
-
-  x1 -= scrollSpeed;
-  x2 -= scrollSpeed;
+  x1 -= scrollingSpeed;
+  x2 -= scrollingSpeed;
 
   if (x1 < -width) {
     x1 = width;
@@ -71,22 +68,16 @@ function draw() {
   }
 
   for (var i = stars.length - 1; i >= 0; i--) {
-    //calling it in the if statement runs it.
-    //If it returns false, the star is no longer on the screen.
     if (stars[i].render() === false) {
-      //replace with new one
       x = windowWidth - 1;
       y = stars[i].y;
       r = floor(random(minStarSize, maxStarSize));
       stars.push(new Star(x, y, r));
-
-      //star is off screen, remove it from the array
       stars.splice(i, 1);
     }
     stars[i].x -= starScrollSpeed;
   }
 
-  //every 250 frames, pick a star and shoot it!
   if (frameCount % 250 == 0) {
     star = random(stars);
     star.shoot();
@@ -101,7 +92,14 @@ function draw() {
 		let c1 = color(c1String);
 		let c2 = color(c2String);//255, 178, 102
     setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
-    //play sound3
+    if(sound3Vol < 1) {
+      sound3Vol += .1;
+      sound3.setVolume(sound3Vol)
+    }
+    if(sound0Vol > 0) {
+      sound0Vol -= .1;
+      sound0.setVolume(sound0Vol);
+    }
   } 
 
   if (stateVal == 2) {
@@ -113,9 +111,20 @@ function draw() {
 		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
 		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
 		let c1 = color(c1String);
-		let c2 = color(c2String);//255, 178, 102
+		let c2 = color(c2String);
     setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
-    //play sound2
+    
+    if(sound3Vol > .6) {
+      sound3Vol -= .1;
+      sound3.setVolume(sound3Vol)
+    } else if (sound3Vol < .6) {
+      sound3Vol += .1;
+      sound3.setVolume(sound3Vol)
+    }
+    if(sound0Vol > 0) {
+      sound0Vol -= .1;
+      sound0.setVolume(sound0Vol);
+    }
   } 
   
   if (stateVal == 1) {
@@ -127,9 +136,20 @@ function draw() {
 		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
 		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
 		let c1 = color(c1String);
-		let c2 = color(c2String);//255, 178, 102
+		let c2 = color(c2String);
     setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
-    //play sound1
+    
+    if(sound3Vol > .3) {
+      sound3Vol -= .1;
+      sound3.setVolume(sound3Vol)
+    } else if (sound3Vol < .3) {
+      sound3Vol += .1;
+      sound3.setVolume(sound3Vol)
+    }
+    if(sound0Vol > 0) {
+      sound0Vol -= .1;
+      sound0.setVolume(sound0Vol);
+    }
 	} 
 
 	if (stateVal == 0) {
@@ -139,10 +159,18 @@ function draw() {
 		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
 		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
 		let c1 = color(c1String);
-		let c2 = color(c2String);//255, 178, 102
+		let c2 = color(c2String);
     setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
-    //play sound0
+    if(sound3Vol > 0) {
+      sound3Vol -= .1;
+      sound3.setVolume(sound3Vol)
+    }
+    if(sound0Vol < 1) {
+      sound0Vol += .1;
+      sound0.setVolume(sound0Vol);
+    }
   }
+  
 }
 
 function setGradient(x, y, w, h, c1, c2, axis) {
@@ -162,7 +190,7 @@ function Star(x, y, r) {
   this.y = y;
   this.r = r;
 
-  this.alpha = 255;
+  this.alphaVal = 255;
   this.xoff = 0;
   this.yoff = 0;
   this.shooting = false;
@@ -172,7 +200,7 @@ function Star(x, y, r) {
     if (this.shooting) {
       this.x += this.xoff;
       this.y += this.yoff;
-      this.alpha -= 5;
+      this.alphaVal -= 5;
     }
     
     //shimmer
@@ -188,7 +216,7 @@ function Star(x, y, r) {
     }
 
     noStroke();
-    fill(red, green, blue, this.alpha);
+    fill(red, green, blue, this.alphaVal);
 
     //draw the star
     ellipse(this.x, this.y, this.r);
