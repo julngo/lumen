@@ -161,7 +161,7 @@ function draw() {
 		let c1 = color(c1String);
 		let c2 = color(c2String);
     setGradient(0, 0, windowWidth, windowHeight, c1, c2, Y_AXIS);
-    if(sound3Vol > 0) {
+    if(sound3Vol > .1) {
       sound3Vol -= .1;
       sound3.setVolume(sound3Vol)
     }
