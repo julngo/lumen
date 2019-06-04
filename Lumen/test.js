@@ -9,8 +9,8 @@ var mtnImg;
 var x1 = 0;
 var x2;
 
-var scrollingSpeed = 0.02;
-var starScrollSpeed = -0.02;
+var scrollingSpeed = 0.04;
+var starScrollSpeed = -0.04;
 var stateVal = 0;
 var alphaVal = 0;
 const Y_AXIS = 1;
@@ -27,7 +27,7 @@ function preload() {
   mtnImg = loadImage("https://i.imgur.com/JUpNcRG.png");
 
   soundFormats('mp3', 'ogg');
-  sound0 = loadSound('sounds/NightSound.mp3')
+  sound0 = loadSound('sounds/nightsoundfinal.mp3')
   sound3 = loadSound('sounds/citySound1.mp3')
   sound0Vol = 0;
   sound3Vol = 0;
@@ -154,7 +154,11 @@ function draw() {
 
 	if (stateVal == 0) {
 		if(cAlpha > .01) {
-			cAlpha -= .005;
+      if(cAlpha < .009){
+        cAlpha = .009;
+      }else {
+        cAlpha -= .009;
+      }
 		}
 		let c1String = 'rgba(0,0,0,' + cAlpha + ')';
 		let c2String = 'rgba(104, 65, 10,' + cAlpha + ')';
@@ -165,7 +169,7 @@ function draw() {
       sound3Vol -= .1;
       sound3.setVolume(sound3Vol)
     }
-    if(sound0Vol < .4) {
+    if(sound0Vol < .8) {
       sound0Vol += .1;
       sound0.setVolume(sound0Vol);
     }
